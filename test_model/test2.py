@@ -47,5 +47,5 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 model.fit_generator(gen(), validation_data=gen(),steps_per_epoch=51200, epochs=5
-                ,verbose=1,workers=0,
+                ,verbose=1,workers=1,
                      validation_steps=1280)
