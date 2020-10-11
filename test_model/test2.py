@@ -49,3 +49,5 @@ model.compile(loss='categorical_crossentropy',
 model.fit_generator(gen(), validation_data=gen(),steps_per_epoch=51200, epochs=5
                 ,verbose=1,workers=1,
                      validation_steps=1280)
+keras_model_path = "./tmp/keras_save"
+model.save(keras_model_path)
