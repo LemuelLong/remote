@@ -51,3 +51,17 @@ model.fit_generator(gen(), validation_data=gen(),steps_per_epoch=51200, epochs=5
                      validation_steps=1280)
 keras_model_path = "./tmp/keras_save"
 model.save(keras_model_path)
+
+from tqdm import tqdm
+def evaluate(model, batch_num=20):
+    batch_acc = 0
+    generator = gen()
+    for i in tqdm(range(batch_num)):
+        X, y = next(generator)
+        y_pred = model.predict(X)
+        y_pred = np.argmax(y_pred, axis=2).T
+        y_true = np.argmax(y, axis=2).T
+        batch_acc += np.mean(map(np.array_equal, y_true, y_pred))
+    return batch_acc / batch_num
+
+evaluate(model)
